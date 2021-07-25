@@ -31,6 +31,7 @@ const App = () => {
   const [skip, setSkip] = useState(0);
   const [form, showForm] = useState(false);
   const [data, setData] = useState([]);
+  const [sort, setSort] = useState(-1);
 
   // app data fetching
   const {
@@ -85,6 +86,7 @@ const App = () => {
           filter: segments[2],
           limit,
           skip,
+          sort,
         }),
       ]
     : null;
@@ -122,7 +124,15 @@ const App = () => {
     <Window>
       {isLoaded() && (
         <MenuBar
-          {...{ categories, timerTypes, segments, showForm, resetData }}
+          {...{
+            categories,
+            timerTypes,
+            segments,
+            showForm,
+            resetData,
+            sort,
+            setSort,
+          }}
         />
       )}
       {isLoaded() ? (
