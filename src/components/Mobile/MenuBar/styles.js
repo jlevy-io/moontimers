@@ -31,6 +31,15 @@ export const Logo = styled(Link)`
     }
   }
 `;
+export const MenuButtons = styled.div`
+  display: flex;
+  div {
+    margin-right: 10px;
+  }
+  div:last-of-type {
+    margin-right: 0px;
+  }
+`;
 
 export const MenuButton = styled.div`
   display: flex;

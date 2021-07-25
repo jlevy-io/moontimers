@@ -2,10 +2,25 @@ import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import Menu from "components/Mobile/Menu";
 import MenuIcon from "assets/images/icons/menu.svg";
-import Container, { Logo, MenuButton } from "./styles";
+import SortUpIcon from "assets/images/icons/sort-up.svg";
+import SortDownIcon from "assets/images/icons/sort-down.svg";
+import Container, { Logo, MenuButton, MenuButtons } from "./styles";
 
-const MenuBar = ({ categories, timerTypes, segments, showForm, resetData }) => {
+const MenuBar = ({
+  categories,
+  timerTypes,
+  segments,
+  showForm,
+  resetData,
+  sort,
+  setSort,
+}) => {
   const [menu, showMenu] = useState(false);
+
+  const handleSort = () => {
+    resetData();
+    return sort === 1 ? setSort(-1) : setSort(1);
+  };
 
   return (
     <Container>
@@ -16,10 +31,18 @@ const MenuBar = ({ categories, timerTypes, segments, showForm, resetData }) => {
           <span>Timers</span>
         </h1>
       </Logo>
-
-      <MenuButton onClick={() => showMenu(!menu)}>
-        <img src={MenuIcon} alt="Menu button" />
-      </MenuButton>
+      <MenuButtons>
+        <MenuButton onClick={() => handleSort()}>
+          {sort === 1 ? (
+            <img src={SortUpIcon} alt="Sort ascending" />
+          ) : (
+            <img src={SortDownIcon} alt="Sort descending" />
+          )}
+        </MenuButton>
+        <MenuButton onClick={() => showMenu(!menu)}>
+          <img src={MenuIcon} alt="Menu button" />
+        </MenuButton>
+      </MenuButtons>
       <AnimatePresence>
         {menu ? (
           <Menu
