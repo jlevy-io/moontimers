@@ -22,6 +22,7 @@ const TimerBar = ({
   date,
   url,
   author,
+  subreddit,
   ticker,
   moonIcons,
   categories,
@@ -51,6 +52,15 @@ const TimerBar = ({
               <CategoryLabel>
                 <span>{`${category.icon} ${category.name}`}</span>
               </CategoryLabel>
+              {subreddit && (
+                <Link
+                  href={`https://reddit.com/r/${subreddit}/`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span>{`/r/${subreddit}`}</span>
+                </Link>
+              )}
               {author && (
                 <Link
                   href={`https://reddit.com/user/${author}/`}

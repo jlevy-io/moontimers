@@ -60,6 +60,7 @@ export const Description = styled(motion.div)`
 `;
 export const InfoBar = styled(motion.div)`
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
 `;
 export const CategoryLabel = styled(motion.div)`
