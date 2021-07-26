@@ -56,6 +56,7 @@ const Main = ({
                         date,
                         url,
                         author,
+                        subreddit,
                         ticker,
                       },
                       index
@@ -70,6 +71,7 @@ const Main = ({
                             date,
                             url,
                             author,
+                            subreddit,
                             ticker,
                             moonIcons,
                             categories,
@@ -87,6 +89,7 @@ const Main = ({
                             date,
                             url,
                             author,
+                            subreddit,
                             ticker,
                             moonIcons,
                             categories,
