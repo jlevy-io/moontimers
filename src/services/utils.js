@@ -103,13 +103,14 @@ export function componentLoader(lazyComponent, attemptsLeft) {
         setTimeout(() => {
           if (attemptsLeft === 1) {
             reject(error);
+            window.location.reload();
             return;
           }
           componentLoader(lazyComponent, attemptsLeft - 1).then(
             resolve,
             reject
           );
-        }, 1000);
+        }, 500);
       });
   });
 }
