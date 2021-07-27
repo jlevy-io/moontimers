@@ -10,8 +10,10 @@ const Error = ({ isMobile, error, resetErrorBoundary }) => {
       <div>
         <span>Something went wrong.</span>
       </div>
-      <pre>{error.message}</pre>
-      <Button onClick={() => resetErrorBoundary()}>Try Again</Button>
+      {error && error.message ? <pre>{error.message}</pre> : null}
+      {resetErrorBoundary ? (
+        <Button onClick={() => resetErrorBoundary()}>Try Again</Button>
+      ) : null}
     </Container>
   );
 };
