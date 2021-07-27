@@ -12,11 +12,14 @@ import MenuBar from "components/Mobile/MenuBar";
 import Footer from "components/Mobile/Footer";
 import Loader from "components/Loader";
 import API from "services/api";
+import { componentLoader } from "services/utils";
 import ViewContainer, { Window } from "../styles";
 
-const Main = lazy(() => import("pages/Mobile/Main"));
-const Error = lazy(() => import("components/Error"));
-const Form = lazy(() => import("components/Mobile/Form"));
+const Main = lazy(() => componentLoader(() => import("pages/Mobile/Main"), 3));
+const Error = lazy(() => componentLoader(() => import("components/Error"), 3));
+const Form = lazy(() =>
+  componentLoader(() => import("components/Mobile/Form"), 3)
+);
 
 const limit = 15;
 
