@@ -4,9 +4,12 @@ import { ErrorBoundary } from "react-error-boundary";
 import { useMediaQuery } from "react-responsive";
 import Loader from "components/Loader";
 import Error from "components/Error";
+import { componentLoader } from "services/utils";
 
-const Router = lazy(() => import("./Router"));
-const MobileApp = lazy(() => import("containers/MobileApp"));
+const Router = lazy(() => componentLoader(() => import("./Router"), 3));
+const MobileApp = lazy(() =>
+  componentLoader(() => import("containers/MobileApp"), 3)
+);
 
 const App = () => {
   const history = useHistory();

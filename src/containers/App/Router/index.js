@@ -10,12 +10,13 @@ import useSWR from "swr";
 import MenuBar from "components/MenuBar";
 import Loader from "components/Loader";
 import API from "services/api";
+import { componentLoader } from "services/utils";
 import ViewContainer from "../ViewContainer";
 import { Window, Content } from "../styles";
 
-const Main = lazy(() => import("pages/Main"));
-const Error = lazy(() => import("components/Error"));
-const Form = lazy(() => import("components/Form"));
+const Main = lazy(() => componentLoader(() => import("pages/Main"), 3));
+const Error = lazy(() => componentLoader(() => import("components/Error"), 3));
+const Form = lazy(() => componentLoader(() => import("components/Form"), 3));
 
 const limit = 15;
 
