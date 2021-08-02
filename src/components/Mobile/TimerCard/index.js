@@ -14,6 +14,7 @@ import Container, {
   Content,
   Left,
   Right,
+  MarketMessage,
 } from "./styles";
 
 const TimerCard = ({
@@ -46,10 +47,14 @@ const TimerCard = ({
       <Content>
         <Left>
           <Description>{description}</Description>
-          <InfoBar>
+          <InfoBar isReddit={subreddit}>
+            <CategoryLabel>
+              <span>{`${category.icon} ${category.name}`}</span>
+            </CategoryLabel>
             <Link href={url} target="_blank" rel="noreferrer">
               Link
             </Link>
+
             {subreddit && (
               <Link
                 href={`https://reddit.com/r/${subreddit}/`}
@@ -68,15 +73,18 @@ const TimerCard = ({
                 <span>{`/u/${author}`}</span>
               </Link>
             )}
-            <CategoryLabel>
-              <span>{`${category.icon} ${category.name}`}</span>
-            </CategoryLabel>
           </InfoBar>
         </Left>
         <Right>
           <BottomRow>
             <Timer {...{ date, timerTypes }} />
-            {ticker && <TickerRow {...{ ticker }} isMobile />}
+            {ticker ? (
+              <TickerRow {...{ ticker }} isMobile />
+            ) : (
+              <MarketMessage>
+                Market data unavailable for this date
+              </MarketMessage>
+            )}
           </BottomRow>
         </Right>
       </Content>
