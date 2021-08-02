@@ -41,7 +41,7 @@ export const Title = styled(motion.div)`
 export const Description = styled(motion.div)`
   // font-size: 1.2rem;
   line-height: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
     padding: 0px 20px;
   }
@@ -50,11 +50,21 @@ export const InfoBar = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
     padding: 0px 20px;
   }
+  div {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  a {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 1px solid ${({ theme }) => theme.colors.primaryDarkBorder};
+  }
 `;
+
 export const CategoryLabel = styled(motion.div)`
   & > span {
     // font-family: "Chirp Bold";
@@ -63,6 +73,7 @@ export const CategoryLabel = styled(motion.div)`
     padding: 3px 6px 4px 3px;
     border-radius: 6px;
     background-color: rgba(29, 161, 242, 0.2);
+    border: 1px solid ${({ theme }) => theme.colors.primaryDarkBorder};
   }
 `;
 export const Link = styled(motion.a)`
@@ -71,10 +82,9 @@ export const Link = styled(motion.a)`
   color: inherit;
   text-decoration: none;
   font-size: 14px;
-  padding: 3px 6px 4px;
+  padding: 3px 8px 4px;
   border-radius: 6px;
   background-color: rgba(29, 161, 242, 0.2);
-  margin-right: 10px;
 `;
 
 export const Content = styled.div`
@@ -102,4 +112,18 @@ export const BottomRow = styled.div`
   align-items: center;
 `;
 
+export const MarketMessage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-family: "Chirp Bold";
+  margin-top: 10px;
+  height: 40px;
+  padding: 0px 20px;
+  border-radius: 8px;
+  background-color: rgba(29, 161, 242, 0.1);
+  border: 1px solid ${({ theme }) => theme.colors.primaryDarkBorder};
+  color: ${({ theme }) => theme.colors.moonYellow};
+`;
 export default Container;
