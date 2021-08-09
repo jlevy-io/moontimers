@@ -41,12 +41,13 @@ export const VideoWrapper = styled.div`
   max-width: 450px;
   aspect-ratio: ${({ aspect }) => aspect};
   margin-bottom: 10px;
-  border-radius: 16px;
-  overflow: hidden;
+
   .react-player {
     position: absolute;
     top: 0;
     left: 0;
+    border-radius: 16px;
+    overflow: hidden;
   }
 `;
 
