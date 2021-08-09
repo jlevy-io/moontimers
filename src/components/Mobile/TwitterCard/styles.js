@@ -55,9 +55,6 @@ export const VideoWrapper = styled.div`
   height: ${({ aspect }) => `calc((100vw - 40px) / ${aspect})`};
   aspect-ratio: ${({ aspect }) => aspect};
   margin-bottom: 10px;
-  border-radius: 16px;
-  overflow: hidden;
-  background: #000;
 
   .react-player {
     position: absolute;
@@ -65,6 +62,8 @@ export const VideoWrapper = styled.div`
     left: 0;
     height: 100%;
     width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
     video {
       object-fit: fill;
       height: 100%;
