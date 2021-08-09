@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Loader from "components/Loader";
 import TimerCard from "components/Mobile/TimerCard";
+import TwitterCard from "components/Mobile/TwitterCard";
 import NoData from "components/NoData";
 import Container from "./styles";
 
@@ -52,27 +53,48 @@ const Main = ({
                         author,
                         subreddit,
                         ticker,
+                        tweet_id,
+                        text,
+                        media,
                       },
                       index
-                    ) => (
-                      <TimerCard
-                        key={`timer-${index + 1}`}
-                        {...{
-                          category_id,
-                          title,
-                          description,
-                          date,
-                          url,
-                          author,
-                          subreddit,
-                          ticker,
-                          moonIcons,
-                          timerTypes,
-                          categories,
-                          index,
-                        }}
-                      />
-                    )
+                    ) =>
+                      tweet_id ? (
+                        <TwitterCard
+                          key={`timer-${index + 1}`}
+                          {...{
+                            category_id,
+                            text,
+                            date,
+                            url,
+                            author,
+                            media,
+                            ticker,
+                            moonIcons,
+                            categories,
+                            timerTypes,
+                            index,
+                          }}
+                        />
+                      ) : (
+                        <TimerCard
+                          key={`timer-${index + 1}`}
+                          {...{
+                            category_id,
+                            title,
+                            description,
+                            date,
+                            url,
+                            author,
+                            subreddit,
+                            ticker,
+                            moonIcons,
+                            timerTypes,
+                            categories,
+                            index,
+                          }}
+                        />
+                      )
                   )}
                 </InfiniteScroll>
               ) : (
