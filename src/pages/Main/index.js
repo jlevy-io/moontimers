@@ -5,6 +5,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Loader from "components/Loader";
 import Controls from "components/Controls";
 import TimerBar from "components/TimerBar";
+import TwitterBar from "components/TwitterBar";
 import TimerCard from "components/Mobile/TimerCard";
 import NoData from "components/NoData";
 import Container from "./styles";
@@ -58,27 +59,49 @@ const Main = ({
                         author,
                         subreddit,
                         ticker,
+                        tweet_id,
+                        text,
+                        media,
                       },
                       index
                     ) =>
                       isDesktopOrLaptop ? (
-                        <TimerBar
-                          key={`timer-${index + 1}`}
-                          {...{
-                            category_id,
-                            title,
-                            description,
-                            date,
-                            url,
-                            author,
-                            subreddit,
-                            ticker,
-                            moonIcons,
-                            categories,
-                            timerTypes,
-                            index,
-                          }}
-                        />
+                        tweet_id ? (
+                          <TwitterBar
+                            key={`timer-${index + 1}`}
+                            {...{
+                              category_id,
+                              text,
+                              date,
+                              url,
+                              author,
+                              media,
+                              ticker,
+                              moonIcons,
+                              categories,
+                              timerTypes,
+                              index,
+                            }}
+                          />
+                        ) : (
+                          <TimerBar
+                            key={`timer-${index + 1}`}
+                            {...{
+                              category_id,
+                              title,
+                              description,
+                              date,
+                              url,
+                              author,
+                              subreddit,
+                              ticker,
+                              moonIcons,
+                              categories,
+                              timerTypes,
+                              index,
+                            }}
+                          />
+                        )
                       ) : (
                         <TimerCard
                           key={`timer-${index + 1}`}
