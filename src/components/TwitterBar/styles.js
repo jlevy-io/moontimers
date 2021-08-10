@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 const Container = styled(motion.div)`
   position: relative;
   display: flex;
-  align-items: center;
   border: 1px solid ${({ theme }) => theme.colors.primaryDarkBorder};
   margin-bottom: 2px;
   transition: all 0.3s ease-out;
@@ -24,7 +23,6 @@ export const ContentWrapper = styled(motion.div)`
 
 export const ContentInner = styled(motion.div)`
   display: flex;
-  align-items: center;
   width: 100%;
   height: 100%;
 `;
@@ -56,13 +54,13 @@ export const ImageWrapper = styled.div`
   display: flex;
   justify-content: center;
   max-width: 450px;
-  max-height: 70vh;
-  aspect-ratio: ${({ aspect }) => aspect};
+  aspect-ratio: 4 / 3;
   margin-bottom: 10px;
   border-radius: 16px;
   overflow: hidden;
+  cursor: pointer;
   img {
-    object-fit: contain;
+    object-fit: cover;
     height: 100%;
     width: 100%;
   }
@@ -84,11 +82,12 @@ export const Title = styled(motion.div)`
   font-family: "Chirp";
   font-weight: 700;
   margin-bottom: 10px;
+  height: 21px;
 `;
 export const Description = styled(motion.div)`
   // font-size: 1.2rem;
-  line-height: 20px;
-  margin-bottom: 20px;
+  height: 20px;
+  margin-bottom: 10px;
 `;
 export const InfoBar = styled(motion.div)`
   display: flex;
@@ -123,6 +122,7 @@ export const ContentRight = styled(motion.div)`
   align-items: flex-end;
   width: 100%;
   flex: 1;
+  margin-top: ${({ hasMedia }) => (hasMedia ? "61px" : "0px")};
 `;
 
 export default Container;

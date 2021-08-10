@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState, lazy, Suspense } from "react";
+import { useSmartcrop } from "use-smartcrop";
 import ReactPlayer from "react-player/lazy";
 import MoonIcon from "components/MoonIcon";
+import Loader from "components/Loader";
 import Timer from "components/Timer";
 import TickerRow from "components/TickerRow";
 import variants from "./variants";
@@ -18,6 +20,8 @@ import Container, {
   ImageWrapper,
 } from "./styles";
 
+const LightBox = lazy(() => import("components/Lightbox"));
+
 const TwitterBar = ({
   category_id,
   date,
@@ -32,6 +36,15 @@ const TwitterBar = ({
   index,
 }) => {
   const category = categories.find((entry) => entry.id === category_id);
+  const [modal, showModal] = useState(false);
+  const [cropped, error] = useSmartcrop(
+    { src: media && media[0] && media[0].media_url_https },
+    {
+      width: 450,
+      height: 337.5,
+      minScale: 1.5,
+    }
+  );
 
   const getVideoURL = (videoArray) => {
     const list = videoArray.filter(
@@ -39,7 +52,6 @@ const TwitterBar = ({
     );
     if (list.length === 1) return list[0].url;
     const sorted = [...list].sort((a, b) => b.bitrate - a.bitrate);
-    console.log(sorted);
     return sorted[0].url;
   };
 
@@ -47,6 +59,8 @@ const TwitterBar = ({
     const { sizes } = photoObject;
     return sizes.large.w / sizes.large.h;
   };
+
+  const onClose = () => showModal(false);
 
   return (
     <Container
@@ -61,7 +75,7 @@ const TwitterBar = ({
           <MoonIcon {...{ date, moonIcons }} />
           <ContentLeft>
             <Title>{`${author.name} on Twitter`}</Title>
-            {text && <Description>{text}</Description>}
+            <Description>{text}</Description>
             {media && media.type && media.type === "video" && (
               <VideoWrapper
                 aspect={
@@ -100,8 +114,11 @@ const TwitterBar = ({
             {Array.isArray(media) &&
               media[0].type &&
               media[0].type === "photo" && (
-                <ImageWrapper aspect={getPhotoAspect(media[0])}>
-                  <img src={media[0].media_url_https} alt={text} />
+                <ImageWrapper
+                  aspect={getPhotoAspect(media[0])}
+                  onClick={() => showModal(true)}
+                >
+                  <img src={!error && cropped} alt={text} />
                 </ImageWrapper>
               )}
             <InfoBar>
@@ -122,12 +139,22 @@ const TwitterBar = ({
               )}
             </InfoBar>
           </ContentLeft>
-          <ContentRight>
+          <ContentRight hasMedia={media}>
             <Timer {...{ date, timerTypes }} />
             {ticker && <TickerRow {...{ ticker }} />}
           </ContentRight>
         </ContentInner>
       </ContentWrapper>
+      {modal && (
+        <Suspense fallback={<Loader full />}>
+          <LightBox
+            imageSrc={media && media[0] && media[0].media_url_https}
+            altText={text}
+            isOpen={modal}
+            onClose={() => onClose()}
+          />
+        </Suspense>
+      )}
     </Container>
   );
 };
