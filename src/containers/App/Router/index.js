@@ -18,9 +18,11 @@ const Main = lazy(() => componentLoader(() => import("pages/Main"), 3));
 const Error = lazy(() => componentLoader(() => import("components/Error"), 3));
 const Form = lazy(() => componentLoader(() => import("components/Form"), 3));
 
+// Number of results to return each time the GET data endpoint is called
 const limit = 15;
 
 const App = () => {
+  // router
   const history = useHistory();
   const location = useLocation();
   const segments = React.useMemo(
@@ -28,10 +30,11 @@ const App = () => {
     [location, history]
   );
 
-  const [skip, setSkip] = useState(0);
+  // local state
+  const [skip, setSkip] = useState(0); // for infinite list loading, number of results to skip
   const [form, showForm] = useState(false);
   const [data, setData] = useState([]);
-  const [sort, setSort] = useState(-1);
+  const [sort, setSort] = useState(-1); // sort order for dates:  -1 for descending, 1 for ascending
 
   // app data fetching
   const {
@@ -104,6 +107,7 @@ const App = () => {
     return setTimeout(() => setSkip(0), 200);
   };
 
+  // route to "all" path of category if type isn't specified
   useEffect(() => {
     if (isLoaded() && !isValidPath() && categoryList.includes(segments[1])) {
       return history.push(`/${segments[1]}/all`);
@@ -112,9 +116,12 @@ const App = () => {
     return () => null;
   }, [categoryList, segments]);
 
+  // infinite scrolling - add new rows to the end of the list as they load in
   useEffect(() => {
     if (timerData[0]) {
-      setData(skip === 0 ? [...timerData] : [...data, ...timerData]);
+      setData((currentData) =>
+        skip === 0 ? [...timerData] : [...currentData, ...timerData]
+      );
     }
 
     return () => null;

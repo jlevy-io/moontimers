@@ -6,6 +6,7 @@ import Loader from "components/Loader";
 import Error from "components/Error";
 import { componentLoader } from "services/utils";
 
+// Code-splitting for mobile/desktop versions of app
 const Router = lazy(() => componentLoader(() => import("./Router"), 3));
 const MobileApp = lazy(() =>
   componentLoader(() => import("containers/MobileApp"), 3)
